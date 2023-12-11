@@ -17,6 +17,13 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class YotubeTest {
+    @EnumSource(Language.class)
+    @ParameterizedTest
+    void selenideSiteShouldDisplayCorrectText(Language language) {
+        open("https://ru.selenide.org/");
+        $$("#languages a").find(text(language.name())).click();
+        $("h3").shouldHave(text(language.description));
+    }
 
     @ValueSource(strings = {"Miyagi - Captain (Official Audio)"})
     @ParameterizedTest(name = "Для поиского запроса {0} должен отдавать не пустой запрос")
@@ -33,7 +40,7 @@ public class YotubeTest {
     @ParameterizedTest(name = "Для поиского запроса {0} должен отдавать не пустой запрос")
     @DisplayName("Тест-кейс")
     public void searchYouTube(String searchFix, String searchText){
-        Configuration.holdBrowserOpen = true;
+
         open("https://www.youtube.com/");
         $("#search-form #search").setValue(searchFix).pressEnter();
         $("ytd-video-renderer .ytd-video-renderer").shouldHave(text(searchText));
@@ -42,12 +49,6 @@ public class YotubeTest {
 
 
 
-    @EnumSource(Language.class)
-    @ParameterizedTest
-    void selenideSiteShouldDisplayCorrectText(Language language) {
-        open("https://ru.selenide.org/");
-        $$("#languages a").find(text(language.name())).click();
-        $("h3").shouldHave(text(language.description));
-    }
+
 }
 
