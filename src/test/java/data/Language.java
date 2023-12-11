@@ -2,8 +2,8 @@ package data;
 
 
     public enum Language {
-        RU("Русский");
-
+        RU("ЧТО ТАКОЕ SELENIDE?"),
+        EN("WHAT IS SELENIDE?");
 
         public final String description;
 
