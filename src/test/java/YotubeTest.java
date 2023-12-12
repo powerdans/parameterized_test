@@ -2,6 +2,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import data.Language;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,6 +18,10 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class YotubeTest {
+    @BeforeAll
+    public static void setUp() {
+        Configuration.pageLoadStrategy = "eager";
+    }
     @EnumSource(Language.class)
     @ParameterizedTest
     void selenideSiteShouldDisplayCorrectText(Language language) {
